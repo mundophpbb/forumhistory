@@ -4,12 +4,23 @@
 <fieldset>
     <legend>{{ lang('ACP_FORUMHISTORY_SETTINGS') }}</legend>
 <dl>
+    <dt><label for="forumhistory_custom_title">{{ lang('FORUMHISTORY_CUSTOM_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_CUSTOM_TITLE_EXPLAIN') }}</span></dt>
+    <dd><input name="forumhistory_custom_title" type="text" id="forumhistory_custom_title" value="{{ FORUMHISTORY_CUSTOM_TITLE }}" maxlength="255" placeholder="{{ lang('FORUMHISTORY_TITLE') }}" /></dd>
+</dl>
+<dl>
     <dt><label for="forumhistory_years">{{ lang('FORUMHISTORY_YEARS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_YEARS_EXPLAIN') }}</span></dt>
     <dd><input name="forumhistory_years" type="text" id="forumhistory_years" value="{{ FORUMHISTORY_YEARS }}" /></dd>
 </dl>
 <dl>
     <dt><label for="forumhistory_facts_num">{{ lang('FORUMHISTORY_FACTS_NUM') ~ lang('COLON') }}</label></dt>
     <dd><input name="forumhistory_facts_num" type="number" id="forumhistory_facts_num" value="{{ FORUMHISTORY_FACTS_NUM }}" min="1" max="10" /></dd>
+</dl>
+<dl>
+    <dt><label for="forumhistory_random">{{ lang('FORUMHISTORY_RANDOM') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_RANDOM_EXPLAIN') }}</span></dt>
+    <dd>
+        <label><input type="radio" class="radio" name="forumhistory_random" id="forumhistory_random" value="1" {{ FORUMHISTORY_RANDOM ? 'checked="checked"' : '' }} /> {{ lang('YES') }}</label>
+        <label><input type="radio" class="radio" name="forumhistory_random" value="0" {{ FORUMHISTORY_RANDOM ? '' : 'checked="checked"' }} /> {{ lang('NO') }}</label>
+    </dd>
 </dl>
 <dl>
     <dt><label for="forumhistory_forums">{{ lang('FORUMHISTORY_FORUMS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_FORUMS_EXPLAIN') }}</span></dt>

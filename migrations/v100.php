@@ -4,9 +4,7 @@
  * @package mundophpbb/forumhistory
  */
 namespace mundophpbb\forumhistory\migrations;
-
 use phpbb\db\migration\migration;
-
 /**
  * Migração para instalar a extensão Forum History
  */
@@ -21,7 +19,6 @@ class v100 extends migration
     {
         return $this->config->offsetExists('forumhistory_years');
     }
-
     /**
      * Adicionar configurações e módulo ACP
      *
@@ -35,6 +32,8 @@ class v100 extends migration
             ['config.add', ['forumhistory_facts_num', 3]],
             ['config.add', ['forumhistory_last_update', time()]],
             ['config.add', ['forumhistory_forums', '']], // Vazio significa incluir todos
+            ['config.add', ['forumhistory_custom_title', '']],
+            ['config.add', ['forumhistory_random', 0]],
             // Adiciona categoria do módulo ACP
             ['module.add', [
                 'acp',
@@ -54,7 +53,6 @@ class v100 extends migration
             ]],
         ];
     }
-
     /**
      * Remover configurações e módulo ACP
      *
@@ -68,6 +66,8 @@ class v100 extends migration
             ['config.remove', ['forumhistory_facts_num']],
             ['config.remove', ['forumhistory_last_update']],
             ['config.remove', ['forumhistory_forums']],
+            ['config.remove', ['forumhistory_custom_title']],
+            ['config.remove', ['forumhistory_random']],
             // Remover módulo ACP
             ['module.remove', [
                 'acp',

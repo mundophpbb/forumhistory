@@ -7,7 +7,7 @@ services:
             - '@dbal.conn'
             - '@cache.driver'
             - '@language'
-            - '@auth'  # Novo: adiciona o auth para permissões
+            - '@auth' # Novo: adiciona o auth para permissões
         tags:
             - { name: event.listener }
     mundophpbb.forumhistory.acp:

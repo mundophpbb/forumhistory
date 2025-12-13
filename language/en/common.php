@@ -10,7 +10,7 @@ if (empty($lang) || !is_array($lang)) {
     $lang = [];
 }
 $lang = array_merge($lang, [
-     'FORUMHISTORY_TITLE' => 'Today in History',
+    'FORUMHISTORY_TITLE' => 'Today in History',
     'FORUMHISTORY_FACT_PREFIX' => '%1$d years ago, the user %2$s created the topic',
     'FORUMHISTORY_REPLY' => '%d reply',
     'FORUMHISTORY_REPLIES' => '%d replies',
