@@ -1,0 +1,24 @@
+services:
+    mundophpbb.forumhistory.listener:
+        class: mundophpbb\forumhistory\event\listener
+        arguments:
+            - '@template'
+            - '@config'
+            - '@dbal.conn'
+            - '@cache.driver'
+            - '@language'
+            - '@auth'  # Novo: adiciona o auth para permissões
+        tags:
+            - { name: event.listener }
+    mundophpbb.forumhistory.acp:
+        class: mundophpbb\forumhistory\acp\forumhistory_module
+        tags:
+            - { name: acp_module }
+    mundophpbb.forumhistory.cron:
+        class: mundophpbb\forumhistory\cron\update_history
+        arguments:
+            - '@config'
+        calls:
+            - [set_name, ['cron.task.forumhistory.update']]
+        tags:
+            - { name: cron.task }
