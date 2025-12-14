@@ -63,7 +63,7 @@ class listener implements EventSubscriberInterface
             $month_key = $now->format('F');
             $month = $this->language->lang(array('datetime', $month_key));
             $day = $now->format('j');
-            $date_str = $day . ' de ' . strtolower($month);
+            $date_str = $day . '  ' . strtolower($month);
             $today_title = $this->language->lang('FORUMHISTORY_TODAY_TITLE', $date_str);
             $this->template->assign_vars([
                 'S_SHOW_TODAY' => $has_today,
