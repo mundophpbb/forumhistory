@@ -1,41 +1,65 @@
 <!-- INCLUDE overall_header.html -->
-<h1>{{ lang('ACP_FORUMHISTORY_TITLE') }}</h1>
-<form id="acp_forumhistory" method="post" action="{{ U_ACTION }}">
-<fieldset>
-    <legend>{{ lang('ACP_FORUMHISTORY_SETTINGS') }}</legend>
-<dl>
-    <dt><label for="forumhistory_custom_title">{{ lang('FORUMHISTORY_CUSTOM_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_CUSTOM_TITLE_EXPLAIN') }}</span></dt>
-    <dd><input name="forumhistory_custom_title" type="text" id="forumhistory_custom_title" value="{{ FORUMHISTORY_CUSTOM_TITLE }}" maxlength="255" placeholder="{{ lang('FORUMHISTORY_TITLE') }}" /></dd>
-</dl>
-<dl>
-    <dt><label for="forumhistory_years">{{ lang('FORUMHISTORY_YEARS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_YEARS_EXPLAIN') }}</span></dt>
-    <dd><input name="forumhistory_years" type="text" id="forumhistory_years" value="{{ FORUMHISTORY_YEARS }}" /></dd>
-</dl>
-<dl>
-    <dt><label for="forumhistory_facts_num">{{ lang('FORUMHISTORY_FACTS_NUM') ~ lang('COLON') }}</label></dt>
-    <dd><input name="forumhistory_facts_num" type="number" id="forumhistory_facts_num" value="{{ FORUMHISTORY_FACTS_NUM }}" min="1" max="10" /></dd>
-</dl>
-<dl>
-    <dt><label for="forumhistory_random">{{ lang('FORUMHISTORY_RANDOM') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_RANDOM_EXPLAIN') }}</span></dt>
-    <dd>
-        <label><input type="radio" class="radio" name="forumhistory_random" id="forumhistory_random" value="1" {{ FORUMHISTORY_RANDOM ? 'checked="checked"' : '' }} /> {{ lang('YES') }}</label>
-        <label><input type="radio" class="radio" name="forumhistory_random" value="0" {{ FORUMHISTORY_RANDOM ? '' : 'checked="checked"' }} /> {{ lang('NO') }}</label>
-    </dd>
-</dl>
-<dl>
-    <dt><label for="forumhistory_forums">{{ lang('FORUMHISTORY_FORUMS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_FORUMS_EXPLAIN') }}</span></dt>
-    <dd>
-        <select id="forumhistory_forums" name="forumhistory_forums[]" multiple="multiple" size="10">
-            <!-- BEGIN forums -->
-            <option value="{{ forums.FORUM_ID }}" {{ forums.SELECTED }} {{ forums.DISABLED }}>{{ forums.FORUM_NAME }}</option>
-            <!-- END forums -->
-        </select>
-    </dd>
-</dl>
-<p class="submit-buttons">
-    <input class="button1" type="submit" name="submit" value="{{ lang('SUBMIT') }}" />
-</p>
-{{ S_FORM_TOKEN }}
-</fieldset>
-</form>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<div class="forumhistory-acp">
+    <h1>{{ lang('ACP_FORUMHISTORY_TITLE') }}</h1>
+    <!-- IF S_SUCCESS_MESSAGE -->
+        <p class="success">{{ S_SUCCESS_MESSAGE }}</p>
+    <!-- ENDIF -->
+    <!-- IF S_ERROR_MESSAGE -->
+        <p class="error">{{ S_ERROR_MESSAGE }}</p>
+    <!-- ENDIF -->
+    <!-- Hidden div for JavaScript translations -->
+    <div id="forumhistory-translations"
+         data-title-required="{{ lang('FORUMHISTORY_CUSTOM_TITLE_REQUIRED') }}"
+         data-years-required="{{ lang('FORUMHISTORY_YEARS_REQUIRED') }}"
+         data-facts-num-required="{{ lang('FORUMHISTORY_FACTS_NUM_REQUIRED') }}"
+         data-yes="{{ lang('YES') }}"
+         data-no="{{ lang('NO') }}"
+         style="display: none;"></div>
+    <!-- Formulário principal -->
+    <form id="acp_forumhistory" method="post" action="{{ U_ACTION }}">
+        <fieldset>
+            <legend>{{ lang('ACP_FORUMHISTORY_SETTINGS') }}</legend>
+            <dl>
+                <dt><label for="forumhistory_custom_title" class="forumhistory-label">{{ lang('FORUMHISTORY_CUSTOM_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_CUSTOM_TITLE_EXPLAIN') }}</span></dt>
+                <dd><input name="forumhistory_custom_title" type="text" id="forumhistory_custom_title" value="{{ FORUMHISTORY_CUSTOM_TITLE }}" maxlength="255" placeholder="{{ lang('FORUMHISTORY_TITLE') }}" class="inputbox" /></dd>
+            </dl>
+            <dl>
+                <dt><label for="forumhistory_years" class="forumhistory-label">{{ lang('FORUMHISTORY_YEARS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_YEARS_EXPLAIN') }}</span></dt>
+                <dd><input name="forumhistory_years" type="text" id="forumhistory_years" value="{{ FORUMHISTORY_YEARS }}" class="inputbox" /></dd>
+            </dl>
+            <dl>
+                <dt><label for="forumhistory_facts_num" class="forumhistory-label">{{ lang('FORUMHISTORY_FACTS_NUM') ~ lang('COLON') }}</label></dt>
+                <dd><input name="forumhistory_facts_num" type="number" id="forumhistory_facts_num" value="{{ FORUMHISTORY_FACTS_NUM }}" min="1" max="10" class="inputbox" /></dd>
+            </dl>
+            <dl>
+                <dt><label for="forumhistory_random" class="forumhistory-label">{{ lang('FORUMHISTORY_RANDOM') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_RANDOM_EXPLAIN') }}</span></dt>
+                <dd class="random-toggle">
+                    <input type="hidden" name="forumhistory_random" id="forumhistory_random_hidden" value="{{ FORUMHISTORY_RANDOM ? '1' : '0' }}">
+                    <button type="button" id="forumhistory_random_toggle" class="toggle-button random-button">
+                        {{ FORUMHISTORY_RANDOM ? lang('YES') : lang('NO') }}
+                    </button>
+                </dd>
+            </dl>
+            <dl>
+                <dt><label for="forumhistory_forums" class="forumhistory-label">{{ lang('FORUMHISTORY_FORUMS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_FORUMS_EXPLAIN') }}</span></dt>
+                <dd>
+                    <select id="forumhistory_forums" name="forumhistory_forums[]" multiple="multiple" size="10" class="inputbox">
+                        <!-- BEGIN forums -->
+                        <option value="{{ forums.FORUM_ID }}" {{ forums.SELECTED }} {{ forums.DISABLED }}>{{ forums.FORUM_NAME }}</option>
+                        <!-- END forums -->
+                    </select>
+                </dd>
+            </dl>
+        </fieldset>
+        <fieldset>
+            <p class="submit-buttons">
+                <input type="submit" name="submit" value="{{ lang('SUBMIT') }}" class="submit-button" />
+                {{ S_FORM_TOKEN }}
+            </p>
+        </fieldset>
+    </form>
+</div>
+<!-- INCLUDECSS @mundophpbb_forumhistory/forumhistory.css -->
+<!-- INCLUDEJS @mundophpbb_forumhistory/forumhistory.js -->
 <!-- INCLUDE overall_footer.html -->
