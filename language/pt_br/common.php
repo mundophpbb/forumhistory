@@ -1,6 +1,6 @@
 <?php
 /**
- * Arquivo de linguagem para a extensão Forum History (pt).
+ * Arquivo de linguagem comum para a extensão Forum History (pt).
  * @package mundophpbb/forumhistory
  */
 if (!defined('IN_PHPBB')) {
@@ -19,4 +19,10 @@ $lang = array_merge($lang, [
     'FORUMHISTORY_WITH' => 'com',
     'FORUMHISTORY_AND' => 'e',
     'NO_FACTS' => 'Nenhum fato histórico encontrado para hoje.',
+    // Adições para a nova seção (usadas no index)
+    'FORUMHISTORY_TODAY_TITLE' => 'Tópicos criados em %s através dos anos',
+    'FORUMHISTORY_FACT_PREFIX_ABS' => 'Em %1$d, o usuário %2$s criou o tópico',
+    // Novas chaves para descrições no index
+    'FORUMHISTORY_RELATIVE_DESC' => 'Esta seção mostra tópicos criados na mesma data de anos específicos, com frases como "Há X anos...".',
+    'FORUMHISTORY_ABSOLUTE_DESC' => 'Esta seção lista os principais tópicos criados na data atual em qualquer ano passado, com frases como "Em YYYY...".',
 ]);

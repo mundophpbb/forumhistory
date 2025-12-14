@@ -34,6 +34,9 @@ class v100 extends migration
             ['config.add', ['forumhistory_forums', '']], // Vazio significa incluir todos
             ['config.add', ['forumhistory_custom_title', '']],
             ['config.add', ['forumhistory_random', 0]],
+            // Novos configs
+            ['config.add', ['forumhistory_enable_relative', 1]],
+            ['config.add', ['forumhistory_enable_absolute', 1]],
             // Adiciona categoria do módulo ACP
             ['module.add', [
                 'acp',
@@ -68,6 +71,9 @@ class v100 extends migration
             ['config.remove', ['forumhistory_forums']],
             ['config.remove', ['forumhistory_custom_title']],
             ['config.remove', ['forumhistory_random']],
+            // Novos removes
+            ['config.remove', ['forumhistory_enable_relative']],
+            ['config.remove', ['forumhistory_enable_absolute']],
             // Remover módulo ACP
             ['module.remove', [
                 'acp',

@@ -1,28 +1,30 @@
-// ForumHistory ACP Custom JS
-
 document.addEventListener('DOMContentLoaded', function() {
-  const translations = document.getElementById('forumhistory-translations');
-  const yesText = translations.dataset.yes || 'Yes';
-  const noText = translations.dataset.no || 'No';
-
-  // Random toggle
-  const randomToggle = document.getElementById('forumhistory_random_toggle');
-  const randomHidden = document.getElementById('forumhistory_random_hidden');
-  if (randomToggle && randomHidden) {
-    updateToggleState(randomToggle, randomHidden.value === '1', yesText, noText);
-    randomToggle.addEventListener('click', function() {
-      const isActive = randomHidden.value === '1';
-      randomHidden.value = isActive ? '0' : '1';
-      updateToggleState(this, !isActive, yesText, noText);
+    const translations = document.getElementById('forumhistory-translations');
+    const yes = translations.dataset.yes;
+    const no = translations.dataset.no;
+    // Função genérica para toggles
+    const toggles = document.querySelectorAll('.toggle-button');
+    toggles.forEach(function(toggle) {
+        const hiddenId = toggle.id.replace('_toggle', '_hidden');
+        const hiddenInput = document.getElementById(hiddenId);
+        // Set initial state
+        if (parseInt(hiddenInput.value) === 1) {
+            toggle.classList.add('active');
+            toggle.textContent = yes;
+        } else {
+            toggle.classList.remove('active');
+            toggle.textContent = no;
+        }
+        toggle.addEventListener('click', function() {
+            const currentValue = parseInt(hiddenInput.value);
+            hiddenInput.value = currentValue === 1 ? 0 : 1;
+            if (hiddenInput.value == 1) {
+                this.classList.add('active');
+                this.textContent = yes;
+            } else {
+                this.classList.remove('active');
+                this.textContent = no;
+            }
+        });
     });
-  }
-
-  function updateToggleState(button, isActive, onText, offText) {
-    button.textContent = isActive ? onText : offText;
-    if (isActive) {
-      button.classList.add('active');
-    } else {
-      button.classList.remove('active');
-    }
-  }
 });

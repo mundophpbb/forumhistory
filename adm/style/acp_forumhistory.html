@@ -42,6 +42,24 @@
                 </dd>
             </dl>
             <dl>
+                <dt><label for="forumhistory_enable_relative" class="forumhistory-label">{{ lang('FORUMHISTORY_ENABLE_RELATIVE') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_ENABLE_RELATIVE_EXPLAIN') }}</span></dt>
+                <dd class="random-toggle">
+                    <input type="hidden" name="forumhistory_enable_relative" id="forumhistory_enable_relative_hidden" value="{{ FORUMHISTORY_ENABLE_RELATIVE ? '1' : '0' }}">
+                    <button type="button" id="forumhistory_enable_relative_toggle" class="toggle-button random-button">
+                        {{ FORUMHISTORY_ENABLE_RELATIVE ? lang('YES') : lang('NO') }}
+                    </button>
+                </dd>
+            </dl>
+            <dl>
+                <dt><label for="forumhistory_enable_absolute" class="forumhistory-label">{{ lang('FORUMHISTORY_ENABLE_ABSOLUTE') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_ENABLE_ABSOLUTE_EXPLAIN') }}</span></dt>
+                <dd class="random-toggle">
+                    <input type="hidden" name="forumhistory_enable_absolute" id="forumhistory_enable_absolute_hidden" value="{{ FORUMHISTORY_ENABLE_ABSOLUTE ? '1' : '0' }}">
+                    <button type="button" id="forumhistory_enable_absolute_toggle" class="toggle-button random-button">
+                        {{ FORUMHISTORY_ENABLE_ABSOLUTE ? lang('YES') : lang('NO') }}
+                    </button>
+                </dd>
+            </dl>
+            <dl>
                 <dt><label for="forumhistory_forums" class="forumhistory-label">{{ lang('FORUMHISTORY_FORUMS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_FORUMS_EXPLAIN') }}</span></dt>
                 <dd>
                     <select id="forumhistory_forums" name="forumhistory_forums[]" multiple="multiple" size="10" class="inputbox">

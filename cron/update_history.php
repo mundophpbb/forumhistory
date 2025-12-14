@@ -12,6 +12,7 @@ class update_history extends \phpbb\cron\task\base
         // Força recalculo chamando get_facts (mas como é private, melhor destruir cache)
         global $cache;
         $cache->destroy('_forumhistory_facts');
+        $cache->destroy('_forumhistory_today_facts'); // Adição para o novo cache
         // Se quiser forçar rebuild imediato, injete db etc. e chame get_facts, mas destroy basta (rebuild on next access)
         $this->config->set('forumhistory_last_update', time());
     }

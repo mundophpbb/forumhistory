@@ -1,3 +1,4 @@
+<!-- IF S_SHOW_HISTORY -->
 <div class="forabg">
     <div class="inner">
         <ul class="topiclist">
@@ -9,14 +10,15 @@
                 </dl>
             </li>
         </ul>
+        <span class="forum-description" style="display: block; padding: 5px 10px; font-style: italic; color: #FFFFFF;">{{ lang('FORUMHISTORY_RELATIVE_DESC') }}</span>
         <ul class="topiclist forums">
             <!-- BEGIN history_facts -->
             <li class="row bg1"> <!-- Use bg1 ou bg2 para alternar cores, como em fóruns -->
                 <dl class="row-item topic_read"> <!-- Ícone de tópico lido; mude para topic_unread se quiser -->
                     <dt>
                         <div class="list-inner">
-                            <a href="{{ history_facts.LINK }}" class="forumtitle">{{ history_facts.TOPIC_TITLE }}</a><br />
-                            <span class="forum-description">{{ lang('FORUMHISTORY_FACT_PREFIX', history_facts.YEAR, history_facts.USERNAME) | raw }}</span><br />
+                            <a href="{{ history_facts.LINK }}" class="forumtitle">{{ history_facts.TOPIC_TITLE }}</a></br>
+                            <span class="forum-description">{{ lang('FORUMHISTORY_FACT_PREFIX', history_facts.YEAR, history_facts.USERNAME) | raw }}</span>
                             <span class="responsive-hide">{{ lang('FORUMHISTORY_WITH') }} {{ history_facts.REPLY_STRING }} {{ lang('FORUMHISTORY_AND') }} {{ history_facts.VIEW_STRING }}</span>
                         </div>
                     </dt>
@@ -35,3 +37,44 @@
         </ul>
     </div>
 </div>
+<!-- ENDIF -->
+<!-- IF S_SHOW_TODAY -->
+<div class="forabg">
+    <div class="inner">
+        <ul class="topiclist">
+            <li class="header">
+                <dl class="row-item">
+                    <dt>
+                        <div class="list-inner">{{ FORUMHISTORY_TODAY_TITLE }}</div>
+                    </dt>
+                </dl>
+            </li>
+        </ul>
+        <span class="forum-description" style="display: block; padding: 5px 10px; font-style: italic; color: #FFFFFF;">{{ lang('FORUMHISTORY_ABSOLUTE_DESC') }}</span>
+        <ul class="topiclist forums">
+            <!-- BEGIN today_facts -->
+            <li class="row bg1">
+                <dl class="row-item topic_read">
+                    <dt>
+                        <div class="list-inner">
+                            <a href="{{ today_facts.LINK }}" class="forumtitle">{{ today_facts.TOPIC_TITLE }}</a><br />
+                            <span class="forum-description">{{ lang('FORUMHISTORY_FACT_PREFIX_ABS', today_facts.ACTUAL_YEAR, today_facts.USERNAME) | raw }}</span>
+                            <span class="responsive-hide">{{ lang('FORUMHISTORY_WITH') }} {{ today_facts.REPLY_STRING }} {{ lang('FORUMHISTORY_AND') }} {{ today_facts.VIEW_STRING }}</span>
+                        </div>
+                    </dt>
+                </dl>
+            </li>
+            <!-- END today_facts -->
+            <!-- IF not today_facts -->
+            <li class="row bg1">
+                <dl class="row-item">
+                    <dt>
+                        <div class="list-inner">{{ lang('NO_FACTS') }}</div>
+                    </dt>
+                </dl>
+            </li>
+            <!-- ENDIF -->
+        </ul>
+    </div>
+</div>
+<!-- ENDIF -->

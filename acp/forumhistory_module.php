@@ -28,8 +28,11 @@ class forumhistory_module
             $config->set('forumhistory_forums', implode(',', $selected_forums));
             $config->set('forumhistory_custom_title', $request->variable('forumhistory_custom_title', $config['forumhistory_custom_title'], true));
             $config->set('forumhistory_random', $request->variable('forumhistory_random', 0));
+            $config->set('forumhistory_enable_relative', $request->variable('forumhistory_enable_relative', 0));
+            $config->set('forumhistory_enable_absolute', $request->variable('forumhistory_enable_absolute', 0));
             // Purge o cache específico após salvar
             $cache->destroy('_forumhistory_facts');
+            $cache->destroy('_forumhistory_today_facts');
             trigger_error($language->lang('ACP_FORUMHISTORY_SAVED') . adm_back_link($this->u_action));
         }
         // Restante do código igual...
@@ -49,6 +52,8 @@ class forumhistory_module
             'FORUMHISTORY_FACTS_NUM' => $config['forumhistory_facts_num'],
             'FORUMHISTORY_CUSTOM_TITLE' => $config['forumhistory_custom_title'],
             'FORUMHISTORY_RANDOM' => (bool) $config['forumhistory_random'],
+            'FORUMHISTORY_ENABLE_RELATIVE' => (bool) $config['forumhistory_enable_relative'],
+            'FORUMHISTORY_ENABLE_ABSOLUTE' => (bool) $config['forumhistory_enable_absolute'],
             'U_ACTION' => $this->u_action,
         ]);
     }
