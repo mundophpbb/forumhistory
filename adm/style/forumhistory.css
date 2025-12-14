@@ -19,7 +19,7 @@
   border-radius: 4px;
   width: 100%;
   max-width: 400px;
-  font-size: 1em;
+  font-size: 1.075em;
   font-family: 'Bai Jamjuree', sans-serif !important;
 }
 
@@ -43,6 +43,7 @@
 .toggle-button.active {
   background-color: #4CAF50; /* Verde para ON/YES */
   color: white;
+  font-size: 1.075em;
   border-color: #4CAF50;
 }
 
@@ -92,4 +93,5 @@
 /* Ajustes para compatibilidade com phpBB ACP */
 fieldset, dl, dt, dd {
   font-family: 'Bai Jamjuree', sans-serif !important;
+  font-size: 1.05em;
 }
