@@ -180,7 +180,6 @@ class listener implements EventSubscriberInterface
         }
         return $facts;
     }
-
     public function get_today_facts()
     {
         global $phpbb_root_path, $phpEx;
@@ -189,7 +188,7 @@ class listener implements EventSubscriberInterface
         if ($use_cache && ($cached = $this->cache->get('_forumhistory_today_facts'))) {
             return $cached;
         }
-        $max_facts = (int) $this->config['forumhistory_facts_num'];
+        $max_facts = (int) $this->config['forumhistory_facts_num']; // Atualizado para usar a config do ACP
         $facts = [];
         $tz = new \DateTimeZone($this->config['board_timezone']);
         $now = new \DateTime('now', $tz);
