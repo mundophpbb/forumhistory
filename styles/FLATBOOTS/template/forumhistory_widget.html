@@ -1,0 +1,78 @@
+<!-- IF S_SHOW_HISTORY -->
+<div class="panel panel-forum">
+<div class="panel-heading">
+ {{ FORUMHISTORY_TITLE }}
+</div>
+<div class="panel-inner">
+<table class="footable table table-striped table-primary table-hover topics-table">
+<thead>
+<tr>
+<th data-class="expand">{L_TITLE}</th>
+</tr>
+</thead>
+<tbody>
+    <!-- BEGIN history_facts -->
+        <tr>
+            <td>
+                <span class="icon-wrapper">
+                    <i class="row-icon-font icon-moon-default2" title="Fato"></i>
+                </span>
+                <div class="desc-wrapper">
+                    <a href="{{ history_facts.LINK }}" class="topictitle">{{ history_facts.TOPIC_TITLE }}</a><br />
+                    {{ lang('FORUMHISTORY_FACT_PREFIX', history_facts.YEAR, history_facts.USERNAME) | raw }} {{ lang('FORUMHISTORY_WITH') }} {{ history_facts.REPLY_STRING }} {{ lang('FORUMHISTORY_AND') }} {{ history_facts.VIEW_STRING }}
+                </div>
+            </td>
+        </tr>
+    <!-- END history_facts -->
+    <!-- IF not history_facts -->
+        <tr>
+            <td>
+                {{ lang('NO_FACTS') }}
+            </td>
+        </tr>
+    <!-- ENDIF -->
+</tbody>
+</table>
+</div>
+</div>
+<div class="space10"></div>
+<!-- EVENT viewforum_sorting_after -->
+<!-- ENDIF -->
+<!-- IF S_SHOW_TODAY -->
+<div class="panel panel-forum">
+<div class="panel-heading">
+ {{ FORUMHISTORY_TODAY_TITLE }}
+</div>
+<div class="panel-inner">
+<table class="footable table table-striped table-primary table-hover topics-table">
+<thead>
+<tr>
+</tr>
+</thead>
+<tbody>
+    <!-- BEGIN today_facts -->
+        <tr>
+            <td>
+                <span class="icon-wrapper">
+                    <i class="row-icon-font icon-moon-default2" title="Fato"></i>
+                </span>
+                <div class="desc-wrapper">
+                    <a href="{{ today_facts.LINK }}" class="topictitle">{{ today_facts.TOPIC_TITLE }}</a><br />
+                    {{ lang('FORUMHISTORY_FACT_PREFIX_ABS', today_facts.ACTUAL_YEAR, today_facts.USERNAME) | raw }} {{ lang('FORUMHISTORY_WITH') }} {{ today_facts.REPLY_STRING }} {{ lang('FORUMHISTORY_AND') }} {{ today_facts.VIEW_STRING }}
+                </div>
+            </td>
+        </tr>
+    <!-- END today_facts -->
+    <!-- IF not today_facts -->
+        <tr>
+            <td>
+                {{ lang('NO_FACTS') }}
+            </td>
+        </tr>
+    <!-- ENDIF -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- ENDIF -->
+{% include 'overall_footer.html' %}
