@@ -18,6 +18,10 @@ services:
         class: mundophpbb\forumhistory\cron\update_history
         arguments:
             - '@config'
+            - '@cache.driver'
+            - '@dbal.conn'
+            - '@auth'
+            - '@language'
         calls:
             - [set_name, ['cron.task.forumhistory.update']]
         tags:
