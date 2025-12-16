@@ -15,7 +15,17 @@ class listener implements EventSubscriberInterface
     }
     public static function getSubscribedEvents()
     {
-        return ['core.index_modify_page_title' => 'add_history_widget'];
+        return [
+            'core.index_modify_page_title' => 'add_history_widget',
+            'core.post_added' => 'invalidate_cache_on_post', // Novo: invalida cache ao adicionar post/tópico
+            'core.topic_added' => 'invalidate_cache_on_post', // Novo: invalida ao adicionar tópico
+        ];
+    }
+    public function invalidate_cache_on_post($event)
+    {
+        // Invalida caches quando um novo post ou tópico é criado
+        $this->cache->destroy('_forumhistory_facts');
+        $this->cache->destroy('_forumhistory_today_facts');
     }
     public function add_history_widget()
     {
@@ -183,17 +193,19 @@ class listener implements EventSubscriberInterface
     public function get_today_facts()
     {
         global $phpbb_root_path, $phpEx;
+        // Include funções admin para get_forum_branch
         include_once($phpbb_root_path . 'includes/functions_admin.' . $phpEx);
         $use_cache = !$this->config['forumhistory_random'];
         if ($use_cache && ($cached = $this->cache->get('_forumhistory_today_facts'))) {
             return $cached;
         }
-        $max_facts = (int) $this->config['forumhistory_facts_num']; // Atualizado para usar a config do ACP
+        $max_facts = (int) $this->config['forumhistory_facts_num'];
         $facts = [];
         $tz = new \DateTimeZone($this->config['board_timezone']);
         $now = new \DateTime('now', $tz);
         $current_ts = $now->getTimestamp();
         $today_md = $now->format('m-d');
+        // Pega fóruns selecionados para EXCLUIR (se vazio, ignora filtro)
         $excluded_forums = ($this->config['forumhistory_forums'] !== '') ? array_map('intval', explode(',', $this->config['forumhistory_forums'])) : [];
         $excluded_ids = [];
         if (!empty($excluded_forums)) {
@@ -216,7 +228,7 @@ class listener implements EventSubscriberInterface
             $reply_count = max(0, $row['replies'] - 1);
             $styled_username = get_username_string('no_profile', $row['topic_poster'], $row['username'], $row['user_colour'], $this->language->lang('GUEST'));
             $reply_key = ($reply_count == 1) ? 'FORUMHISTORY_REPLY' : 'FORUMHISTORY_REPLIES';
-            $view_key = ($row['views'] == 1) ? 'FORUMHISTORY_VIEW' : 'FORUMHISTORY_VIEWS';
+            $view_key = ((int)$row['views'] == 1) ? 'FORUMHISTORY_VIEW' : 'FORUMHISTORY_VIEWS';
             $facts[] = [
                 'actual_year' => $actual_year,
                 'username' => $styled_username,
