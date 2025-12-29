@@ -2,7 +2,7 @@
     "name": "mundophpbb/forumhistory",
     "type": "phpbb-extension",
     "description": "Widget 'Today in Forum History' for nostalgia and retention",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "license": "GPL-2.0-only",
     "authors": [
         {
