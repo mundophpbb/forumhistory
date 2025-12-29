@@ -4,7 +4,9 @@
  * @package mundophpbb/forumhistory
  */
 namespace mundophpbb\forumhistory\migrations;
+
 use phpbb\db\migration\migration;
+
 /**
  * Migração para instalar a extensão Forum History
  */
@@ -19,6 +21,7 @@ class v100 extends migration
     {
         return $this->config->offsetExists('forumhistory_years');
     }
+
     /**
      * Adicionar configurações e módulo ACP
      *
@@ -37,6 +40,9 @@ class v100 extends migration
             // Novos configs
             ['config.add', ['forumhistory_enable_relative', 1]],
             ['config.add', ['forumhistory_enable_absolute', 1]],
+            // Nova configuração: formato da data na seção absoluta
+            ['config.add', ['forumhistory_date_format', 'default']],
+
             // Adiciona categoria do módulo ACP
             ['module.add', [
                 'acp',
@@ -50,12 +56,13 @@ class v100 extends migration
                 [
                     'module_basename' => '\mundophpbb\forumhistory\acp\forumhistory_module',
                     'module_langname' => 'ACP_FORUMHISTORY_SETTINGS',
-                    'module_mode' => 'settings',
-                    'module_auth' => 'ext_mundophpbb/forumhistory && acl_a_board',
+                    'module_mode'     => 'settings',
+                    'module_auth'     => 'ext_mundophpbb/forumhistory && acl_a_board',
                 ],
             ]],
         ];
     }
+
     /**
      * Remover configurações e módulo ACP
      *
@@ -74,6 +81,8 @@ class v100 extends migration
             // Novos removes
             ['config.remove', ['forumhistory_enable_relative']],
             ['config.remove', ['forumhistory_enable_absolute']],
+            ['config.remove', ['forumhistory_date_format']],
+
             // Remover módulo ACP
             ['module.remove', [
                 'acp',
@@ -81,7 +90,7 @@ class v100 extends migration
                 [
                     'module_basename' => '\mundophpbb\forumhistory\acp\forumhistory_module',
                     'module_langname' => 'ACP_FORUMHISTORY_SETTINGS',
-                    'module_mode' => 'settings',
+                    'module_mode'     => 'settings',
                 ],
             ]],
             // Remover categoria ACP

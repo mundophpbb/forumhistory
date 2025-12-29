@@ -151,15 +151,60 @@ class listener implements EventSubscriberInterface
             $tz = new \DateTimeZone($this->config['board_timezone']);
             $now = new \DateTime('now', $tz);
 
-            $month_key = $now->format('F');
-            $month = $this->language->lang(['datetime', $month_key]);
-            $day = $now->format('j');
-            $date_str = $day . ' ' . strtolower($month);
+            // Pega a escolha do admin no ACP
+            $format_choice = $this->config['forumhistory_date_format'] ?? 'default';
+
+            // Array de tradução dos meses (inglês → português)
+            $pt_months = [
+                'January'   => 'janeiro',
+                'February'  => 'fevereiro',
+                'March'     => 'março',
+                'April'     => 'abril',
+                'May'       => 'maio',
+                'June'      => 'junho',
+                'July'      => 'julho',
+                'August'    => 'agosto',
+                'September' => 'setembro',
+                'October'   => 'outubro',
+                'November'  => 'novembro',
+                'December'  => 'dezembro',
+            ];
+
+            // Detecta se o idioma atual do usuário é português
+            $user_lang = $this->language->lang('USER_LANG');
+            $is_portuguese = in_array($user_lang, ['pt', 'pt-br', 'pt_br']);
+
+            switch ($format_choice)
+            {
+                case 'numeric':
+                    // 29/12 — universal, sem tradução necessária
+                    $date_str = $now->format('d/m');
+                    break;
+
+                case 'month_day':
+                    // Estilo americano: dezembro 29 (PT) ou December 29 (EN)
+                    $english_month_day = $now->format('F j');
+                    $date_str = $is_portuguese
+                        ? $pt_months[$now->format('F')] . ' ' . $now->format('j')
+                        : $english_month_day;
+                    break;
+
+                case 'default':
+                default:
+                    // Padrão bonito: 29 de dezembro (PT) ou 29 December (EN)
+                    $english_day_month = $now->format('j F');
+                    $date_str = $is_portuguese
+                        ? $now->format('j') . ' de ' . $pt_months[$now->format('F')]
+                        : $english_day_month;
+                    break;
+            }
+
+            // Monta o título final usando a string traduzida do idioma atual
+            $today_title = $this->language->lang('FORUMHISTORY_TODAY_TITLE', $date_str);
 
             $this->template->assign_vars([
                 'S_SHOW_TODAY'            => true,
-                'FORUMHISTORY_TODAY_TITLE'=> $this->language->lang('FORUMHISTORY_TODAY_TITLE', $date_str),
-                'DATE_STR'                => $date_str,
+                'FORUMHISTORY_TODAY_TITLE'=> $today_title,
             ]);
         }
 
@@ -190,7 +235,6 @@ class listener implements EventSubscriberInterface
         $input = trim($this->config['forumhistory_years']);
         if (strtolower($input) === 'all')
         {
-            // Calcula todos os anos desde o primeiro tópico
             $sql_where = 't.topic_visibility = 1';
             if (!empty($excluded_ids))
             {
@@ -351,7 +395,7 @@ class listener implements EventSubscriberInterface
             $styled_username = get_username_string('no_profile', $row['topic_poster'], $row['username'], $row['user_colour'], $this->language->lang('GUEST'));
 
             $reply_key = ($reply_count == 1) ? 'FORUMHISTORY_REPLY' : 'FORUMHISTORY_REPLIES';
-            $view_key  = ($row['views'] == 1) ? 'FORUMHISTORY_VIEW' : 'FORUMHISTORY_VIEWS';
+            $view_key = ($row['views'] == 1) ? 'FORUMHISTORY_VIEW' : 'FORUMHISTORY_VIEWS';
 
             $facts[] = [
                 'actual_year'  => $actual_year,

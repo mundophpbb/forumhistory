@@ -59,6 +59,19 @@
                     </button>
                 </dd>
             </dl>
+
+            <!-- NOVO CAMPO: Formato da data -->
+            <dl>
+                <dt><label for="forumhistory_date_format" class="forumhistory-label">{{ lang('FORUMHISTORY_DATE_FORMAT') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_DATE_FORMAT_EXPLAIN') }}</span></dt>
+                <dd>
+                    <select name="forumhistory_date_format" id="forumhistory_date_format" class="inputbox">
+                        <option value="default" {{ FORUMHISTORY_DATE_FORMAT == 'default' ? 'selected="selected"' : '' }}>{{ lang('FORUMHISTORY_DATE_FORMAT_DEFAULT') }}</option>
+                        <option value="numeric" {{ FORUMHISTORY_DATE_FORMAT == 'numeric' ? 'selected="selected"' : '' }}>{{ lang('FORUMHISTORY_DATE_FORMAT_NUMERIC') }}</option>
+                        <option value="month_day" {{ FORUMHISTORY_DATE_FORMAT == 'month_day' ? 'selected="selected"' : '' }}>{{ lang('FORUMHISTORY_DATE_FORMAT_MONTH_DAY') }}</option>
+                    </select>
+                </dd>
+            </dl>
+
             <dl>
                 <dt><label for="forumhistory_forums" class="forumhistory-label">{{ lang('FORUMHISTORY_FORUMS') ~ lang('COLON') }}</label><br><span>{{ lang('FORUMHISTORY_FORUMS_EXPLAIN') }}</span></dt>
                 <dd>

@@ -12,11 +12,11 @@
         </ul>
         <ul class="topiclist forums">
             <!-- BEGIN history_facts -->
-            <li class="row bg1"> <!-- Use bg1 ou bg2 para alternar cores, como em fóruns -->
-                <dl class="row-item topic_read"> <!-- Ícone de tópico lido; mude para topic_unread se quiser -->
+            <li class="row bg1">
+                <dl class="row-item topic_read">
                     <dt>
                         <div class="list-inner">
-                            <a href="{{ history_facts.LINK }}" class="forumtitle">{{ history_facts.TOPIC_TITLE }}</a></br>
+                            <a href="{{ history_facts.LINK }}" class="forumtitle">{{ history_facts.TOPIC_TITLE }}</a><br />
                             <span class="forum-description">{{ lang('FORUMHISTORY_FACT_PREFIX', history_facts.YEAR, history_facts.USERNAME) | raw }}</span>
                             <span class="responsive-hide">{{ lang('FORUMHISTORY_WITH') }} {{ history_facts.REPLY_STRING }} {{ lang('FORUMHISTORY_AND') }} {{ history_facts.VIEW_STRING }}</span>
                         </div>
@@ -28,7 +28,7 @@
             <li class="row bg1">
                 <dl class="row-item">
                     <dt>
-                        <div class="list-inner">{{ lang('NO_FACTS') }}</div> <!-- Adicione lang se quiser mensagem vazia -->
+                        <div class="list-inner">{{ lang('NO_FACTS') }}</div>
                     </dt>
                 </dl>
             </li>
@@ -37,6 +37,7 @@
     </div>
 </div>
 <!-- ENDIF -->
+
 <!-- IF S_SHOW_TODAY -->
 <div class="forabg">
     <div class="inner">
