@@ -1,32 +1,35 @@
 <?php
-/**
- * Language file for the Forum History extension ACP (en).
- * @package mundophpbb/forumhistory
- */
 if (!defined('IN_PHPBB')) {
     exit;
 }
 if (empty($lang) || !is_array($lang)) {
     $lang = [];
 }
+
 $lang = array_merge($lang, [
-    'ACP_FORUMHISTORY_TITLE' => 'Forum History Today',
-    'ACP_FORUMHISTORY_SETTINGS' => 'History Settings',
-    'FORUMHISTORY_CUSTOM_TITLE' => 'Custom widget title',
-    'FORUMHISTORY_CUSTOM_TITLE_EXPLAIN' => 'Leave blank to use the default "Today in History".',
-    'FORUMHISTORY_CUSTOM_TITLE_REQUIRED' => 'The custom title is required if used.',
-    'FORUMHISTORY_YEARS' => 'Years to consider',
-    'FORUMHISTORY_YEARS_EXPLAIN' => 'Comma-separated values or ranges, ex.: 1,3-5,10. Use \'all\' to consider all years since the forum began.',
-    'FORUMHISTORY_YEARS_REQUIRED' => 'The years to consider are required.',
-    'FORUMHISTORY_FACTS_NUM' => 'Number of facts per day',
-    'FORUMHISTORY_FACTS_NUM_REQUIRED' => 'The number of facts is required.',
-    'FORUMHISTORY_RANDOM' => 'Random facts',
-    'FORUMHISTORY_RANDOM_EXPLAIN' => 'If enabled, selects a random topic for each year instead of the most replied.',
-    'ACP_FORUMHISTORY_SAVED' => 'Settings saved!',
-    'FORUMHISTORY_ENABLE_RELATIVE' => 'Enable "Today in History" section',
-    'FORUMHISTORY_ENABLE_RELATIVE_EXPLAIN' => 'This section highlights topics created on the same date in previous years, with relative phrases like "X years ago...",<br /> selected based on year settings and popularity.',
-    'FORUMHISTORY_ENABLE_ABSOLUTE' => 'Enable "Topics created on [current date] through the years" section',
-    'FORUMHISTORY_ENABLE_ABSOLUTE_EXPLAIN' => 'This section lists topics created exactly on this date in different years, with absolute phrases like "In YYYY...",<br /> showing the most popular or random ones.',
-    'FORUMHISTORY_FORUMS' => 'Forums/Categories to exclude',
-    'FORUMHISTORY_FORUMS_EXPLAIN' => 'Select multiple to exclude from history. Categories will automatically exclude subforums. Leave blank to include all.',
+    'ACP_FORUMHISTORY_TITLE'              => 'Today in Forum History',
+    'ACP_FORUMHISTORY_SETTINGS'           => 'Settings',
+
+    'FORUMHISTORY_CUSTOM_TITLE'           => 'Custom widget title',
+    'FORUMHISTORY_CUSTOM_TITLE_EXPLAIN'   => 'Leave empty to use the default title "Today in Forum History".',
+
+    'FORUMHISTORY_YEARS'                  => 'Years to consider',
+    'FORUMHISTORY_YEARS_EXPLAIN'          => 'Examples: 1,3-5,10 or "all" for every year since the forum started.',
+
+    'FORUMHISTORY_FACTS_NUM'              => 'Maximum number of facts per section',
+    'FORUMHISTORY_FACTS_NUM_EXPLAIN'      => 'How many topics to show in each section (recommended: 3 to 5).',
+
+    'FORUMHISTORY_FORUMS'                 => 'Forums/Categories to exclude',
+    'FORUMHISTORY_FORUMS_EXPLAIN'         => 'Select forums or categories that should not appear in the history. Subforums are automatically excluded.',
+
+    'FORUMHISTORY_RANDOM'                 => 'Select random topics',
+    'FORUMHISTORY_RANDOM_EXPLAIN'         => 'If enabled, chooses random topics instead of the most popular ones.',
+
+    'FORUMHISTORY_ENABLE_RELATIVE'        => 'Enable "X years ago..." section',
+    'FORUMHISTORY_ENABLE_RELATIVE_EXPLAIN'=> 'Shows topics created exactly on the same date in previous years (e.g., "3 years ago...").',
+
+    'FORUMHISTORY_ENABLE_ABSOLUTE'        => 'Enable "Topics created on [current date]" section',
+    'FORUMHISTORY_ENABLE_ABSOLUTE_EXPLAIN'=> 'Lists the most popular topics created on this date in any past year.',
+
+    'ACP_FORUMHISTORY_SAVED'              => 'Settings for the "Today in Forum History" extension have been saved successfully.',
 ]);

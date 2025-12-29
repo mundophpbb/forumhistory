@@ -5,24 +5,33 @@ services:
             - '@template'
             - '@config'
             - '@dbal.conn'
-            - '@cache.driver'
+            - '@cache'                   # Serviço correto: phpbb\cache\service
             - '@language'
-            - '@auth' # Novo: adiciona o auth para permissões
+            - '@auth'
+            - '%core.root_path%'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
+
     mundophpbb.forumhistory.acp:
         class: mundophpbb\forumhistory\acp\forumhistory_module
         tags:
-            - { name: acp_module }
-    mundophpbb.forumhistory.cron:
+            - { name: acp.module }
+
+    mundophpbb.forumhistory.cron.update_history:
         class: mundophpbb\forumhistory\cron\update_history
         arguments:
             - '@config'
-            - '@cache.driver'
-            - '@dbal.conn'
-            - '@auth'
-            - '@language'
-        calls:
-            - [set_name, ['cron.task.forumhistory.update']]
+            - '@cache'                   # Serviço correto para o cron
         tags:
-            - { name: cron.task }
+            - { name: cron.task, task: mundophpbb_forumhistory_update_history }
+
+    # Opcional: nome traduzido bonito na lista de tarefas cron do ACP
+    # Descomente se quiser usar (e crie a lang key FORUMHISTORY_CRON_NAME no idioma desejado)
+    # mundophpbb.forumhistory.cron.name:
+    #     class: phpbb\cron\task\wrapper
+    #     arguments:
+    #         - '@mundophpbb.forumhistory.cron.update_history'
+    #         - 'FORUMHISTORY_CRON_NAME'
+    #     tags:
+    #         - { name: cron.task }

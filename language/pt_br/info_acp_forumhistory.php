@@ -1,32 +1,35 @@
 <?php
-/**
- * Arquivo de linguagem para o ACP da extensão Forum History (pt).
- * @package mundophpbb/forumhistory
- */
 if (!defined('IN_PHPBB')) {
     exit;
 }
 if (empty($lang) || !is_array($lang)) {
     $lang = [];
 }
+
 $lang = array_merge($lang, [
-    'ACP_FORUMHISTORY_TITLE' => 'Hoje na História do Fórum',
-    'ACP_FORUMHISTORY_SETTINGS' => 'Configurações da História',
-    'FORUMHISTORY_CUSTOM_TITLE' => 'Título customizado do widget',
-    'FORUMHISTORY_CUSTOM_TITLE_EXPLAIN' => 'Deixe vazio para usar o padrão "Hoje na História".',
-    'FORUMHISTORY_CUSTOM_TITLE_REQUIRED' => 'O título customizado é obrigatório se usado.',
-    'FORUMHISTORY_YEARS' => 'Anos a considerar',
-    'FORUMHISTORY_YEARS_EXPLAIN' => 'Valores separados por vírgula ou intervalos, ex.: 1,3-5,10. Use \'all\' para considerar todos os anos desde o início do fórum.',
-    'FORUMHISTORY_YEARS_REQUIRED' => 'Os anos a considerar são obrigatórios.',
-    'FORUMHISTORY_FACTS_NUM' => 'Número de fatos por dia',
-    'FORUMHISTORY_FACTS_NUM_REQUIRED' => 'O número de fatos é obrigatório.',
-    'FORUMHISTORY_RANDOM' => 'Fatos aleatórios',
-    'FORUMHISTORY_RANDOM_EXPLAIN' => 'Se ativado, seleciona um tópico aleatório para cada ano em vez do mais respondido.',
-    'ACP_FORUMHISTORY_SAVED' => 'Configurações salvas!',
-    'FORUMHISTORY_ENABLE_RELATIVE' => 'Ativar seção "Hoje na História"',
-    'FORUMHISTORY_ENABLE_RELATIVE_EXPLAIN' => 'Esta seção destaca tópicos criados na mesma data de anos anteriores, com frases relativas como "Há X anos...",</br> selecionados com base nas configurações de anos e popularidade.',
-    'FORUMHISTORY_ENABLE_ABSOLUTE' => 'Ativar seção "Tópicos criados em [data atual] através dos anos"',
-    'FORUMHISTORY_ENABLE_ABSOLUTE_EXPLAIN' => 'Esta seção lista tópicos criados exatamente nesta data em anos diferentes, com frases absolutas como "Em YYYY...",</br> mostrando os mais populares ou aleatórios.',
-    'FORUMHISTORY_FORUMS' => 'Fóruns/Categorias a excluir',
-    'FORUMHISTORY_FORUMS_EXPLAIN' => 'Selecione múltiplos para excluir da história. Categorias excluirão subfóruns automaticamente. Deixe vazio para incluir todos.',
+    'ACP_FORUMHISTORY_TITLE'              => 'Hoje na História do Fórum',
+    'ACP_FORUMHISTORY_SETTINGS'           => 'Configurações',
+
+    'FORUMHISTORY_CUSTOM_TITLE'           => 'Título personalizado do widget',
+    'FORUMHISTORY_CUSTOM_TITLE_EXPLAIN'   => 'Deixe vazio para usar o título padrão "Hoje na História do Fórum".',
+
+    'FORUMHISTORY_YEARS'                  => 'Anos a considerar',
+    'FORUMHISTORY_YEARS_EXPLAIN'          => 'Exemplos: 1,3-5,10 ou "all" para todos os anos desde o início do fórum.',
+
+    'FORUMHISTORY_FACTS_NUM'              => 'Número máximo de fatos por seção',
+    'FORUMHISTORY_FACTS_NUM_EXPLAIN'      => 'Quantos tópicos mostrar em cada seção (recomendado: 3 a 5).',
+
+    'FORUMHISTORY_FORUMS'                 => 'Fóruns/Categorias a excluir',
+    'FORUMHISTORY_FORUMS_EXPLAIN'         => 'Selecione fóruns ou categorias que não devem aparecer na história. Subfóruns são excluídos automaticamente.',
+
+    'FORUMHISTORY_RANDOM'                 => 'Selecionar tópicos aleatórios',
+    'FORUMHISTORY_RANDOM_EXPLAIN'         => 'Se ativado, escolhe tópicos aleatórios em vez dos mais populares.',
+
+    'FORUMHISTORY_ENABLE_RELATIVE'        => 'Ativar seção "Há X anos..."',
+    'FORUMHISTORY_ENABLE_RELATIVE_EXPLAIN'=> 'Mostra tópicos criados exatamente na mesma data de anos anteriores (ex: "Há 3 anos...").',
+
+    'FORUMHISTORY_ENABLE_ABSOLUTE'        => 'Ativar seção "Tópicos criados em [data atual]"',
+    'FORUMHISTORY_ENABLE_ABSOLUTE_EXPLAIN'=> 'Lista os tópicos mais populares criados nesta data em qualquer ano passado.',
+
+    'ACP_FORUMHISTORY_SAVED'              => 'Configurações da extensão "Hoje na História do Fórum" foram salvas com sucesso.',
 ]);
