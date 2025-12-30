@@ -2,13 +2,14 @@
 /**
  * Forum History extension - Cron task
  */
-
 namespace mundophpbb\forumhistory\cron;
 
 use phpbb\cron\task\base;
 
 /**
  * Cron task to invalidate the Forum History cache every 24 hours
+ *
+ * @package mundophpbb\forumhistory
  */
 class update_history extends base
 {
@@ -21,15 +22,23 @@ class update_history extends base
     /**
      * Constructor
      *
-     * @param \phpbb\config\config   $config Config object
-     * @param \phpbb\cache\service   $cache  Cache service
+     * @param \phpbb\config\config $config Config object
+     * @param \phpbb\cache\service $cache Cache service
      */
-    public function __construct(
-        \phpbb\config\config $config,
-        \phpbb\cache\service $cache
-    ) {
+    public function __construct(\phpbb\config\config $config, \phpbb\cache\service $cache)
+    {
         $this->config = $config;
         $this->cache  = $cache;
+    }
+
+    /**
+     * Retorna o nome da tarefa (obrigatório a partir do phpBB 3.3+ para tarefas web-triggered)
+     *
+     * @return string
+     */
+    public function get_name()
+    {
+        return 'mundophpbb.forumhistory.update_history';
     }
 
     /**
@@ -46,7 +55,7 @@ class update_history extends base
     }
 
     /**
-     * Verifica se o cron pode ser executado (sempre sim)
+     * Verifica se a tarefa pode ser executada
      *
      * @return bool
      */
@@ -56,7 +65,7 @@ class update_history extends base
     }
 
     /**
-     * Verifica se o cron DEVE rodar agora (a cada 24 horas)
+     * Verifica se a tarefa DEVE rodar agora (a cada 24 horas)
      *
      * @return bool
      */
@@ -64,13 +73,13 @@ class update_history extends base
     {
         $last_update = (int) $this->config['forumhistory_last_update'];
 
-        // Se nunca rodou, força a primeira execução
+        // Primeira execução
         if ($last_update === 0)
         {
             return true;
         }
 
-        // Roda se já passaram 24 horas (86400 segundos)
-        return $last_update < (time() - 86400);
+        // Executa se já passaram 24 horas
+        return (time() - $last_update) >= 86400;
     }
 }
